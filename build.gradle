@@ -1,0 +1,68 @@
+apply plugin: 'idea'
+apply plugin: 'java'
+apply from: 'external-dependencies.gradle'
+apply from: 'idea-config.gradle'
+
+group 'uk.gov'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.13.0"
+        classpath "com.github.jengelman.gradle.plugins:shadow:1.2.3"
+        classpath 'org.owasp:dependency-check-gradle:1.4.4.1'
+    }
+}
+
+apply plugin: 'com.github.ben-manes.versions'
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: 'org.owasp.dependencycheck'
+
+dependencyCheck {
+    failBuildOnCVSS = 0
+    suppressionFile = 'dependency-check-suppressions.xml'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal() // FIXME don't commit
+    maven {
+        url 'https://dl.bintray.com/alphagov/maven'
+    }
+}
+
+//noinspection GroovyAssignabilityCheck
+configurations {
+    compile.exclude module: 'slf4j-log4j12'
+    compile.exclude module: 'slf4j-simple' // dropwizard uses logback, not slf4j-simple
+}
+
+dependencies {
+    compile dropwizard
+    compile dropwizardLogstash
+
+    testCompile junit, mockito, dropwizardTest
+}
+
+jar.baseName = "dropwizard-exemplar"
+
+shadowJar {
+    mergeServiceFiles()
+
+    baseName = "dropwizard-exemplar"
+    manifest {
+        attributes 'Main-Class': 'uk.gov.ExemplarApplication'
+    }
+}
+
+assemble {
+    dependsOn << shadowJar
+}
+
+
