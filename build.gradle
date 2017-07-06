@@ -1,3 +1,4 @@
+apply plugin: 'application'
 apply plugin: 'idea'
 apply plugin: 'java'
 apply from: 'external-dependencies.gradle'
@@ -5,19 +6,24 @@ apply from: 'idea-config.gradle'
 
 group 'uk.gov'
 
+// Use Java 8 by default
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+// UTF-8 should be standard by now. So use it!
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
         classpath "com.github.ben-manes:gradle-versions-plugin:0.13.0"
-        classpath "com.github.jengelman.gradle.plugins:shadow:1.2.3"
         classpath 'org.owasp:dependency-check-gradle:1.4.4.1'
     }
 }
 
 apply plugin: 'com.github.ben-manes.versions'
-apply plugin: "com.github.johnrengelman.shadow"
 apply plugin: 'org.owasp.dependencycheck'
 
 dependencyCheck {
@@ -52,17 +58,5 @@ dependencies {
 
 jar.baseName = "dropwizard-exemplar"
 
-shadowJar {
-    mergeServiceFiles()
-
-    baseName = "dropwizard-exemplar"
-    manifest {
-        attributes 'Main-Class': 'uk.gov.ExemplarApplication'
-    }
-}
-
-assemble {
-    dependsOn << shadowJar
-}
-
+mainClassName = 'uk.gov.ExemplarApplication'
 

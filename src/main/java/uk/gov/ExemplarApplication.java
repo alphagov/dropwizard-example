@@ -1,14 +1,19 @@
 package uk.gov;
 
 import io.dropwizard.Application;
+import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
+import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import uk.gov.resources.HelloWorld;
 
 public class ExemplarApplication extends Application<ExemplarConfiguration> {
-
-    public static void main(final String[] args) throws Exception {
-        new ExemplarApplication().run(args);
+    public static void main(String[] args) throws Exception {
+        if (args == null || args.length == 0) {
+            new ExemplarApplication().run("server", System.getenv("CONFIG_FILE"));
+        } else {
+            new ExemplarApplication().run(args);
+        }
     }
 
     @Override
@@ -18,6 +23,11 @@ public class ExemplarApplication extends Application<ExemplarConfiguration> {
 
     @Override
     public void initialize(final Bootstrap<ExemplarConfiguration> bootstrap) {
+        bootstrap.setConfigurationSourceProvider(
+                new SubstitutingSourceProvider(bootstrap.getConfigurationSourceProvider(),
+                        new EnvironmentVariableSubstitutor(false)
+                )
+        );
     }
 
     @Override

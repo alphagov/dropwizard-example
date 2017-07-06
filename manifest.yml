@@ -1,0 +1,8 @@
+---
+applications:
+- name: dropwizard-example
+  memory: 512M
+  buildpack: java_buildpack
+  path: build/distributions/dropwizard-exemplar.zip
+  env:
+    CONFIG_FILE: dropwizard-exemplar/config.yaml
