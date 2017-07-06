@@ -43,6 +43,10 @@ repositories {
     }
 }
 
+project.ext {
+    dropwizardConfig = './src/dist/config.yaml'
+}
+
 //noinspection GroovyAssignabilityCheck
 configurations {
     compile.exclude module: 'slf4j-log4j12'
@@ -60,3 +64,6 @@ jar.baseName = "dropwizard-example"
 
 mainClassName = 'uk.gov.ExampleApplication'
 
+run {
+    args 'server', dropwizardConfig
+}
