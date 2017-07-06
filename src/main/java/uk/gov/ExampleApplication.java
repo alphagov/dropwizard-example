@@ -5,6 +5,7 @@ import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import uk.gov.ida.dropwizard.logstash.LogstashBundle;
 import uk.gov.resources.HelloWorld;
 
 public class ExampleApplication extends Application<ExampleConfiguration> {
@@ -28,8 +29,7 @@ public class ExampleApplication extends Application<ExampleConfiguration> {
                         new EnvironmentVariableSubstitutor(false)
                 )
         );
-
-
+        bootstrap.addBundle(new LogstashBundle());
     }
 
     @Override

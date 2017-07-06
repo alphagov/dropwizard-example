@@ -3,9 +3,11 @@ server:
     - type: http
       port: ${PORT:-8080}
 
+  requestLog:
+    appenders:
+      - type: access-logstash-console
+
 logging:
   level: INFO
-  loggers:
-    com.eidas.uk.gov.bridge: DEBUG
   appenders:
-    - type: console
+    - type: logstash-console
