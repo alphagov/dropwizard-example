@@ -56,7 +56,7 @@ dependencies {
     testCompile junit, mockito, dropwizardTest
 }
 
-jar.baseName = "dropwizard-exemplar"
+jar.baseName = "dropwizard-example"
 
-mainClassName = 'uk.gov.ExemplarApplication'
+mainClassName = 'uk.gov.ExampleApplication'
 
