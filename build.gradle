@@ -37,7 +37,6 @@ task wrapper(type: Wrapper) {
 
 repositories {
     mavenCentral()
-    mavenLocal() // FIXME don't commit
     maven {
         url 'https://dl.bintray.com/alphagov/maven'
     }
