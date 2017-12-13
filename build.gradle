@@ -55,6 +55,7 @@ configurations {
 dependencies {
     compile dropwizard
     compile dropwizardLogstash
+    compile dropwizardMetricsInfluxDB
     compile dropwizardPrometheus
 
     testCompile junit, mockito, dropwizardTest

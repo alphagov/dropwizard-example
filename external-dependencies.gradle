@@ -24,6 +24,8 @@ ext {
             'io.prometheus:simpleclient_hotspot:0.1.0'
     ]
 
+    dropwizardMetricsInfluxDB = "com.izettle:dropwizard-metrics-influxdb:1.2.2"
+
     // test dependencies
     dropwizardTest = "io.dropwizard:dropwizard-testing:${dropwizard_version}"
     junit = ['junit:junit:4.12','org.hamcrest:hamcrest-library:1.3']
