@@ -18,10 +18,7 @@ ext {
     dropwizardLogstash = "uk.gov.ida:dropwizard-logstash:1.1.2-build_45"
 
     dropwizardPrometheus = [
-            'io.prometheus:simpleclient:0.1.0',
-            'io.prometheus:simpleclient_dropwizard:0.1.0',
-            'io.prometheus:simpleclient_servlet:0.1.0',
-            'io.prometheus:simpleclient_hotspot:0.1.0'
+            'uk.gov.reng:gds_metrics_dropwizard:1.0.0'
     ]
 
     // test dependencies

@@ -12,7 +12,12 @@ import io.prometheus.client.exporter.MetricsServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import uk.gov.ida.dropwizard.logstash.LogstashBundle;
+import uk.gov.reng.metrics.config.Configuration;
+import uk.gov.reng.metrics.filter.AuthenticationFilter;
 import uk.gov.resources.HelloWorld;
+
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
 
 public class ExampleApplication extends Application<ExampleConfiguration> {
     public static void main(String[] args) throws Exception {
@@ -43,8 +48,18 @@ public class ExampleApplication extends Application<ExampleConfiguration> {
     @Override
     public void run(final ExampleConfiguration configuration,
                     final Environment environment) {
+        final Configuration conf = Configuration.getInstance();
+
         environment.jersey().register(new HelloWorld());
-        environment.servlets().addServlet("prometheus", new MetricsServlet()).addMapping("/prometheus");
+        environment.servlets().addServlet("prometheus", new MetricsServlet())
+                .addMapping(conf.getPrometheusMetricsPath());
+
+        environment.servlets()
+                .addFilter("AuthenticationFilter", new AuthenticationFilter())
+                .addMappingForUrlPatterns(
+                        EnumSet.of(DispatcherType.REQUEST),
+                        true,
+                        conf.getPrometheusMetricsPath());
     }
 
 }
