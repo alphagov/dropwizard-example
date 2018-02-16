@@ -12,6 +12,7 @@ import io.prometheus.client.exporter.MetricsServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import uk.gov.ida.dropwizard.logstash.LogstashBundle;
+import uk.gov.reng.metrics.bundle.MetricsBundle;
 import uk.gov.reng.metrics.config.Configuration;
 import uk.gov.reng.metrics.filter.AuthenticationFilter;
 import uk.gov.resources.HelloWorld;
@@ -41,25 +42,26 @@ public class ExampleApplication extends Application<ExampleConfiguration> {
                 )
         );
         bootstrap.addBundle(new LogstashBundle());
-        MetricRegistry metrics = bootstrap.getMetricRegistry();
-        CollectorRegistry.defaultRegistry.register(new DropwizardExports(metrics));
+        bootstrap.addBundle(new MetricsBundle());
+//        MetricRegistry metrics = bootstrap.getMetricRegistry();
+//        CollectorRegistry.defaultRegistry.register(new DropwizardExports(metrics));
     }
 
     @Override
     public void run(final ExampleConfiguration configuration,
                     final Environment environment) {
-        final Configuration conf = Configuration.getInstance();
+//        final Configuration conf = Configuration.getInstance();
 
         environment.jersey().register(new HelloWorld());
-        environment.servlets().addServlet("prometheus", new MetricsServlet())
-                .addMapping(conf.getPrometheusMetricsPath());
-
-        environment.servlets()
-                .addFilter("AuthenticationFilter", new AuthenticationFilter())
-                .addMappingForUrlPatterns(
-                        EnumSet.of(DispatcherType.REQUEST),
-                        true,
-                        conf.getPrometheusMetricsPath());
+//        environment.servlets().addServlet("prometheus", new MetricsServlet())
+//                .addMapping(conf.getPrometheusMetricsPath());
+//
+//        environment.servlets()
+//                .addFilter("AuthenticationFilter", new AuthenticationFilter())
+//                .addMappingForUrlPatterns(
+//                        EnumSet.of(DispatcherType.REQUEST),
+//                        true,
+//                        conf.getPrometheusMetricsPath());
     }
 
 }
