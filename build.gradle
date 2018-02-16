@@ -36,6 +36,7 @@ task wrapper(type: Wrapper) {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven {
         url 'https://dl.bintray.com/alphagov/maven'
@@ -54,7 +55,7 @@ configurations {
 
 dependencies {
     compile dropwizard
-    compile dropwizardLogstash
+//    compile dropwizardLogstash
     compile dropwizardPrometheus
 
     testCompile junit, mockito, dropwizardTest
