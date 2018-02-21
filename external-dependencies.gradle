@@ -18,7 +18,7 @@ ext {
     dropwizardLogstash = "uk.gov.ida:dropwizard-logstash:1.1.2-build_45"
 
     dropwizardPrometheus = [
-            'engineering.gds-reliability:gds_metrics_dropwizard:1.0.0'
+            'engineering.gds-reliability:gds-metrics-dropwizard:0.0.1'
     ]
 
     // test dependencies

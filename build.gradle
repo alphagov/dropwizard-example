@@ -37,10 +37,8 @@ task wrapper(type: Wrapper) {
 
 repositories {
     mavenCentral()
-    mavenLocal()
-    maven {
-        url 'https://dl.bintray.com/alphagov/maven'
-    }
+    maven { url 'https://dl.bintray.com/alphagov/maven' }
+    maven { url "https://dl.bintray.com/reliability-engineering-gds/gds_metrics_dropwizard" }
 }
 
 project.ext {
