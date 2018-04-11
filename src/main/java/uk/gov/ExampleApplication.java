@@ -12,9 +12,9 @@ import io.prometheus.client.exporter.MetricsServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import uk.gov.ida.dropwizard.logstash.LogstashBundle;
-import uk.gov.reng.metrics.bundle.MetricsBundle;
-import uk.gov.reng.metrics.config.Configuration;
-import uk.gov.reng.metrics.filter.AuthenticationFilter;
+import engineering.reliability.gds.metrics.bundle.MetricsBundle;
+import engineering.reliability.gds.metrics.config.Configuration;
+import engineering.reliability.gds.metrics.filter.AuthenticationFilter;
 import uk.gov.resources.HelloWorld;
 
 import javax.servlet.DispatcherType;
