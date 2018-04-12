@@ -15,7 +15,7 @@ ext {
             "io.dropwizard.metrics:metrics-graphite:${dropwizard_metrics_version}"
     ]
 
-    dropwizardLogstash = "uk.gov.ida:dropwizard-logstash:1.1.2-build_45"
+    dropwizardLogstash = "uk.gov.ida:dropwizard-logstash:1.2.0-build_50"
 
     dropwizardPrometheus = [
             'uk.gov.reng:gds_metrics_dropwizard:1.0.0'
