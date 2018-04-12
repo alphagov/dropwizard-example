@@ -1,7 +1,7 @@
 ---
 applications:
 - name: dropwizard-example
-  memory: 512M
+  memory: 1G
   buildpack: java_buildpack
   path: build/distributions/dropwizard-example.zip
   env:
