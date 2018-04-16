@@ -37,7 +37,6 @@ task wrapper(type: Wrapper) {
 
 repositories {
     mavenCentral()
-    mavenLocal()
     maven {
         url 'https://dl.bintray.com/alphagov/maven'
     }
